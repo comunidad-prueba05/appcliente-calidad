@@ -19,8 +19,9 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('',include(('bases.urls', 'bases'), namespace='bases') ),
-    # path('registro/',include(('registro.urls', 'registro'), namespace='registro') ),
+
+    path('',include(('homepage.urls', 'homepage'), namespace='homepage') ),
+    path('bases/',include(('bases.urls', 'bases'), namespace='bases') ),
     # path('che/',include(('che.urls', 'che'), namespace='che') ),
     path('admin/', admin.site.urls),
 ]
