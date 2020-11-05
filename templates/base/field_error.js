@@ -15,4 +15,5 @@
             icon: 'error'
         });
     {% endif %}
+
 </script>

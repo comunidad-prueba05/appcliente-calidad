@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'bases',
     'homepage',
+    'usuario',
+    'ordenes',
 ]
 
 MIDDLEWARE = [
@@ -50,9 +52,12 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'crum.CurrentRequestUserMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
+
+AUTH_USER_MODEL = 'usuario.User'
 
 TEMPLATES = [
     {
@@ -117,6 +122,11 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR,'static'),)
+
+MEDIA_URL = '/media/'
+MEDIA_ROT = (os.path.join(BASE_DIR,'media'),)
+
+
 
 LOGIN_REDIRECT_URL = '/bases/home/'
 LOGOUT_REDIRECT_URL = ''

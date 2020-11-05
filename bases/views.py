@@ -3,6 +3,7 @@ from django.contrib.auth.views import LoginView
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
+from django.contrib import messages
 
 
 
@@ -26,6 +27,8 @@ class SinPrivilegios(LoginRequiredMixin,PermissionRequiredMixin):
 
 class Login(LoginView):
     template_name = 'bases/login.html'
+    success_messages='benvenido'
+
 
     def dispatch(self, request,*args, **kwargs):
         if request.user.is_authenticated:
@@ -40,6 +43,7 @@ class Login(LoginView):
 class Home(LoginRequiredMixin, generic.TemplateView):
     permission_required = 'base.view_usuario'
     template_name = 'bases/home.html'
+
 
 
 class HomeSinPrivilegios(generic.TemplateView):
