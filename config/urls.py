@@ -19,11 +19,12 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('',include(('bases.urls', 'bases'), namespace='bases') ),
-    # path('registro/',include(('registro.urls', 'registro'), namespace='registro') ),
-    # path('che/',include(('che.urls', 'che'), namespace='che') ),
+
+    path('',include(('homepage.urls', 'homepage'), namespace='homepage') ),
+    path('bases/',include(('bases.urls', 'bases'), namespace='bases') ),
+    path('ordenes/',include(('ordenes.urls', 'ordenes'), namespace='ordenes') ),
     path('admin/', admin.site.urls),
+
 ]
 
-# if settings.DEBUG:
-#     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

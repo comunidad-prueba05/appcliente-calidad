@@ -1,35 +1,27 @@
-{% extends 'base/base.html' %}
-{% block header %}{% endblock %}
-{% block sidebar %}{% endblock %}
-{% block content %}{% endblock %}
-{% block sidebard %}{% endblock %}
-{% block footer %}{% endblock %}
-{% load static %}
-
+{% extends 'base/home.html' %}
 {% block login %}
-<html>
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="../../index2.html"><b>Umg</b>Calidad</a>
+    <a href="#"><b>{{title}}</b></a>
   </div>
-  <!-- /.login-logo -->
   <div class="card">
     <div class="card-body login-card-body">
-      <p class="login-box-msg">Regístrese para iniciar su sesión</p>
-
-      <form class="user" method="POST" >
-        {% csrf_token %}
+      <p class="login-box-msg"></p>
+      <form action="{% url 'bases:login' %}" method="post">
+       <input type="hidden" name="next" value="{{ next }}">
+       {% csrf_token %}
+       {% include 'base/field_error.js' %}
         <div class="input-group mb-3">
-          <input type="text" class="form-control" id="id_username" name="username"  placeholder="Usuario">
+          <input type="text" class="form-control" id="id_username" name="username" placeholder="Usuario">
           <div class="input-group-append">
             <div class="input-group-text">
-              <span class="fas fa-users"></span>
+              <span class="fas fa-envelope"></span>
             </div>
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" id="id_password" name="password" placeholder="Password">
+          <input type="password" class="form-control" id="id_password" name="password" placeholder="Contraseña">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -37,18 +29,14 @@
           </div>
         </div>
         <div class="row">
-          <!-- /.col -->
-          <div class="col-4">
-            <button type="submit" class="btn btn-primary btn-block">Acceder</button>
+          <div class="col-12">
+            <button type="submit" class="btn btn-primary btn-block">Iniciar</button>
           </div>
-          <!-- /.col -->
         </div>
       </form>
+
     </div>
-    <!-- /.login-card-body -->
   </div>
 </div>
-<!-- /.login-box -->
 </body>
-</html>
 {% endblock %}
