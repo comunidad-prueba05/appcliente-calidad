@@ -32,10 +32,10 @@ class Servicio(BaseModel):
     tipo_servicio = models.ForeignKey(TiposServicio, on_delete=models.CASCADE)
     no_servicio = models.AutoField(primary_key=True)
     orden_generada = models.BooleanField(default = True)
-    orden_transito = models.BooleanField(null=True , blank=True)
+    orden_transito = models.BooleanField(default = False)
 
     def __str__(self):
-        return self.username
+        return '{}'.format(self.no_servicio)
 
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
         user = get_current_user()
@@ -68,7 +68,54 @@ class HistorialOrdenes(models.Model):
         db_table = 'historial_servicio'
 
 
+class OrdenGenerada(BaseModel):
+    username = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
+    no_servicio = models.ForeignKey(Servicio, on_delete=models.CASCADE)
+    estado = models.BooleanField(default = True, blank=True, null=True)
+    nombre = models.CharField('nombre cliente', max_length=200)
 
+    def __str__(self):
+        return self.nombre
+
+    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+        user = get_current_user()
+        if user is not None:
+            if not self.pk:
+                self.user_creation = user
+            else:
+                self.user_updated = user
+        super(OrdenGenerada, self).save()
+
+    class Meta:
+        verbose_name = 'Orden registrada'
+        verbose_name_plural = 'Ordenes registradas'
+        db_table = 'orden_registrada'
+
+
+
+
+class Cliente(BaseModel):
+    nombres = models.CharField('Nombres cliente', max_length=200)
+    apellidos = models.CharField('Apellidos cliente', max_length=200)
+    nit = models.CharField('NIT', max_length=20)
+    tel = models.CharField('telefono', max_length=10)
+
+    def __str__(self):
+        return self.nombres
+
+    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+        user = get_current_user()
+        if user is not None:
+            if not self.pk:
+                self.user_creation = user
+            else:
+                self.user_updated = user
+        super(Cliente, self).save()
+
+    class Meta:
+        verbose_name = 'Cliente'
+        verbose_name_plural = 'Clientes'
+        db_table = 'cliente'
 
 
 

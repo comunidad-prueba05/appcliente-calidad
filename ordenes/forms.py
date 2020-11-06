@@ -3,7 +3,7 @@ from django.forms import ModelForm, Form
 from django import forms
 
 
-from ordenes.models import TiposServicio, Servicio
+from ordenes.models import TiposServicio, Servicio, OrdenGenerada
 
 class TipoServicioForm(ModelForm):
     def __init__(self, *args, **kwargs):
@@ -34,6 +34,7 @@ class OrdenServicioForm(ModelForm):
         super().__init__(*args, **kwargs)
         self.fields['tipo_servicio'].widget.attrs['autofocus'] = True
 
+
     class Meta:
         model = Servicio
         fields = '__all__'
@@ -49,3 +50,35 @@ class OrdenServicioForm(ModelForm):
                 }
             ),
         }
+
+class OrdenGeneradaForm(ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['no_servicio'].widget.attrs['autofocus'] = True
+
+    class Meta:
+        model = OrdenGenerada
+        fields = ['no_servicio','nombre' ]
+        exclude = ['username', 'estado']
+        labels = {
+            # 'no_servicio': 'No. Servicio',
+            'nombre':'No. Ventanilla'
+
+        }
+        widgets = {
+            'no_servicio': forms.Select(
+                attrs={
+                    'class': 'form-control select2',
+                    'style': 'width: 100%'
+                }
+            ),
+            'nombre': forms.TextInput(
+                attrs={
+                    'class': 'form-control'
+                }
+            ),
+        }
+    no_servicio = forms.ModelChoiceField(queryset=Servicio.objects.filter(orden_generada=True, orden_transito=False), widget=forms.Select(attrs={
+        'class': 'form-control select2',
+        'style': 'width: 100%'
+    }))

@@ -1,0 +1,24 @@
+{% extends 'base/list.html' %}
+
+{% block columns %}
+  <tr>
+    <th scope="col" >No. orden</th>
+    <th scope="col" >Tipo servicio</th>
+    <th class="all">Opciones</th>
+  </tr>
+{% endblock %}
+
+{% block rows %}
+{% for m in generarservicio_list  %}
+  <tr>
+    <td>{{m.nombre}}</td>
+    <td></td>
+    <td>
+      <a href="" class="btn btn-warning btn-xs btn-flat">
+        <i class="fas fa-edit"></i></a>
+      <a href="#" class="btn btn-danger btn-xs btn-flat">
+        <i class="fas fa-trash-alt"></i></a>
+    </td>
+  </tr>
+{% endfor %}
+{% endblock %}

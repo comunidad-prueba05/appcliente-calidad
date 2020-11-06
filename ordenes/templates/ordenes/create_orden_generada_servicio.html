@@ -1,0 +1,66 @@
+{% extends 'base/layaut.html' %}
+{% load static %}
+{% block head %}
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+{% endblock %}
+
+{% block content %}
+<div class="content-wrapper">
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>{{title}}</h1>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section>
+  <form method="post" action="." enctype="multipart/form-data">
+    {% csrf_token %}
+    {% include 'base/field_error.js'%}
+      <div class="container-fluid">
+        <div class="card card-primary card-outline">
+          <div class="card-header">
+            <h3 class="card-title">
+              {% if object_list %}
+                <i class="fas fa-plus"></i>
+              {% else %}
+                <i class="fas fa-edit"></i>
+              {% endif %}
+              {{title}}
+            </h3>
+          </div>
+          <div class="card-body">
+            <div class="form-group">
+              <label for="email">{{ form.no_servicio.label }}</label>
+                {{ form.no_servicio}}
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="form-group">
+              <label for="email">{{ form.nombre.label }}</label>
+                {{ form.nombre}}
+            </div>
+          </div>
+          <div class="card-footer">
+            <button type="submit" class="btn btn-primary btn-flat">
+              <i class="fas fa-save"></i>Guardar registro
+            </button>
+          </div>
+      </div>
+    </div>
+  </form>
+</section>
+</div>
+{% endblock %}
+{% block javascript %}
+<script type="text/javascript">
+  $(function(){
+    $('.select2').select2({
+
+    });
+  });
+</script>
+{% endblock %}
