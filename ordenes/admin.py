@@ -1,3 +1,4 @@
 from django.contrib import admin
+from ordenes.models import TiposServicio
 
-# Register your models here.
+admin.site.register(TiposServicio)

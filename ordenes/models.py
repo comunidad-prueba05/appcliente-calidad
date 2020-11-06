@@ -30,7 +30,7 @@ class TiposServicio(BaseModel):
 class Servicio(BaseModel):
     username = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
     tipo_servicio = models.ForeignKey(TiposServicio, on_delete=models.CASCADE)
-    no_servico = models.AutoField(primary_key=True)
+    no_servicio = models.AutoField(primary_key=True)
     orden_generada = models.BooleanField(default = True)
     orden_transito = models.BooleanField(null=True , blank=True)
 
@@ -50,6 +50,26 @@ class Servicio(BaseModel):
         verbose_name = 'Servicio'
         verbose_name_plural = 'Servicios'
         db_table = 'servicio'
+
+
+class HistorialOrdenes(models.Model):
+    create_at = models.DateTimeField(auto_now_add=True)
+    update_at = models.DateTimeField(auto_now=True)
+    username = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
+    estado = models.ForeignKey(TiposServicio, on_delete=models.CASCADE)
+    id_servicio = models.ForeignKey(Servicio, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.id_servicio.no_servicio
+
+    class Meta:
+        verbose_name = 'Historial de servicio'
+        verbose_name_plural = 'Historial de servicios'
+        db_table = 'historial_servicio'
+
+
+
+
 
 
 # class CdrByBusinessFlowID(models.Model):

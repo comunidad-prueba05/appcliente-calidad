@@ -1,0 +1,82 @@
+{% extends 'base/layaut.html' %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'base/plugins/jsgrid/jsgrid.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'base/plugins/jsgrid/jsgrid-theme.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'base/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css' %}">
+    <link rel="stylesheet" href="{% static 'base/plugins/datatables-responsive/css/responsive.bootstrap4.min.css' %}">
+    <script src="{% static 'base/plugins/datatables/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'base/plugins/datatables/jquery.dataTables.js' %}"></script>
+    <script src="{% static 'base/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js' %}"></script>
+    <script src="{% static 'base/plugins/datatables-responsive/js/dataTables.responsive.min.js' %}"></script>
+    <script src="{% static 'base/plugins/datatables-responsive/js/responsive.bootstrap4.min.js' %}"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+{% endblock %}
+
+{% block content %}
+<div class="content-wrapper">
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>{{title}}</h1>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+            </div>
+            <div class="card-body">
+              <table id="tabla_tipo" class="table table-bordered table-hover">
+                <thead>
+                  {% block columns %}
+
+                  {% endblock %}
+                </thead>
+                <tbody>
+                  {% block rows %}
+
+                  {% endblock %}
+                </tbody>
+              </table>
+            </div>
+            <div class="card-footer">
+            {% block buttons_list %}
+              <a href="{{ new_url }}" class="btn btn-primary btn-flat btnTest">
+                  <i class="fas fa-plus"></i> Nuevo registro
+              </a>
+              <a href="{{ list_url }}" class="btn btn-success btn-flat">
+                  <i class="fas fa-sync"></i> Actualizar
+              </a>
+          {% endblock %}
+          </div>
+        </div>
+      </div>
+    </div>
+   </div>
+  </section>
+</div>
+{% endblock %}
+{% block javascript %}
+<script>
+  $(function () {
+    $('#tabla_tipo').DataTable({
+      "paging": true,
+      "lengthChange": true,
+      "searching": true,
+      "order": false,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+      "language": {
+      "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+    }
+    });
+  });
+</script>
+{% endblock %}

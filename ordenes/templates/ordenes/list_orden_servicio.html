@@ -2,17 +2,19 @@
 
 {% block columns %}
   <tr>
-    <th scope="col" style="width: 90%" >Tipos de categoria</th>
+    <th scope="col" style="width: 30%" >No. Servicio</th>
+    <th scope="col" style="width: 90%" >Tipos de servicio</th>
     <th class="all">Opciones</th>
   </tr>
 {% endblock %}
 
 {% block rows %}
-{% for m in tiposservicio_list  %}
+{% for m in servicio_list  %}
   <tr>
-    <td>{{m.name}}</td>
+    <td>{{m.no_servicio}}</td>
+    <td>{{m.tipo_servicio}}</td>
     <td>
-      <a href="{% url 'ordenes:update_servicios' m.pk %}" class="btn btn-warning btn-xs btn-flat">
+      <a href="#" class="btn btn-warning btn-xs btn-flat">
         <i class="fas fa-edit"></i></a>
       <a href="#" class="btn btn-danger btn-xs btn-flat">
         <i class="fas fa-trash-alt"></i></a>
