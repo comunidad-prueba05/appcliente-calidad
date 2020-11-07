@@ -18,6 +18,7 @@ class UserList(ListView):
         context ['title'] = 'Usuario Administrativos'
         context['list_url'] = reverse_lazy('usuario:list_usuario')
         context['new_url'] = reverse_lazy('usuario:new_usuario')
+        context['url_home'] = reverse_lazy('bases:home')
         return context
 
 class RegistrarUser(CreateView):
@@ -29,6 +30,7 @@ class RegistrarUser(CreateView):
     def get_context_data(self , *args , **kwargs):
         context = super().get_context_data(*args, **kwargs)
         context ['title'] = 'Registrar Usuario'
+        context['url_home'] = reverse_lazy('bases:home')
         return context
 
 class UserUpdate(UpdateView):
@@ -40,4 +42,5 @@ class UserUpdate(UpdateView):
     def get_context_data(self , *args , **kwargs):
         context = super().get_context_data(*args, **kwargs)
         context ['title'] = 'Editar Usuario'
+        context['url_home'] = reverse_lazy('bases:home')
         return context

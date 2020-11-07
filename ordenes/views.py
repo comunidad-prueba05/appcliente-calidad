@@ -20,6 +20,7 @@ class TipoServicio(ListView):
         context ['title'] = 'Tipos de servicio'
         context['list_url'] = reverse_lazy('ordenes:lista_servicios')
         context['new_url'] = reverse_lazy('ordenes:new_servicios')
+        context['url_home'] = reverse_lazy('bases:home')
         return context
 
 class TipoServicioNew(CreateView):
@@ -40,7 +41,7 @@ class TipoServicioNew(CreateView):
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Formulario tipo de servicios'
-        # context['list_perfil'] = reverse_lazy('usuario:mi_perfil')
+        context['url_home'] = reverse_lazy('bases:home')
         return context
 
 class TipoServicioUpdate(UpdateView):
@@ -53,7 +54,7 @@ class TipoServicioUpdate(UpdateView):
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Editar tipo de servicios'
-        # context['list_perfil'] = reverse_lazy('usuario:mi_perfil')
+        context['url_home'] = reverse_lazy('bases:home')
         return context
 
 class OrdenServicio(ListView):
@@ -71,6 +72,7 @@ class OrdenServicio(ListView):
         context ['title'] = 'Atencion al Cliente'
         context['list_url'] = reverse_lazy('ordenes:lista_ordenes_servicios')
         context['new_url'] = reverse_lazy('ordenes:new_ordenes_servicios')
+        context['url_home'] = reverse_lazy('bases:home')
         return context
 
 class ServicioNew(CreateView):
@@ -91,7 +93,7 @@ class ServicioNew(CreateView):
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Generar No. Servicio'
-        # context['list_perfil'] = reverse_lazy('usuario:mi_perfil')
+        context['url_home'] = reverse_lazy('bases:home')
         return context
 
 class PantallList(TemplateView):
@@ -120,7 +122,7 @@ class GenerarServicio(ListView):
         context ['title'] = 'Generar Orden de Servicio'
         context['list_url'] = reverse_lazy('ordenes:lista_generadas_servicios')
         context['new_url'] = reverse_lazy('ordenes:new_generadas_servicios')
-        print(context)
+        context['url_home'] = reverse_lazy('bases:home')
         return context
 
 class GenerarServicioNew(CreateView):
@@ -132,7 +134,7 @@ class GenerarServicioNew(CreateView):
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Formulario de atención'
-        # context['list_perfil'] = reverse_lazy('usuario:mi_perfil')
+        context['url_home'] = reverse_lazy('bases:home')
         return context
 
 
@@ -165,6 +167,7 @@ class ClienteList(ListView):
         context ['title'] = 'Listado de Clientes'
         context['list_url'] = reverse_lazy('ordenes:lista_cliente')
         context['new_url'] = reverse_lazy('ordenes:new_cliente')
+        context['url_home'] = reverse_lazy('bases:home')
         return context
 
 
@@ -186,7 +189,7 @@ class ClienteNew(CreateView):
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Registrar Cliente'
-        # context['list_perfil'] = reverse_lazy('usuario:mi_perfil')
+        context['url_home'] = reverse_lazy('bases:home')
         return context
 
 class ClienteUpdate(UpdateView):
@@ -199,7 +202,7 @@ class ClienteUpdate(UpdateView):
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Editar cliente'
-        # context['list_perfil'] = reverse_lazy('usuario:mi_perfil')
+        context['url_home'] = reverse_lazy('bases:home')
         return context
 
 class FormularServicioList(ListView):
@@ -215,7 +218,7 @@ class FormularServicioList(ListView):
         context ['title'] = 'Listado de Servicios'
         context['list_url'] = reverse_lazy('ordenes:lista_form_servicio')
         context['new_url'] = reverse_lazy('ordenes:new_form_servicio')
-        print(context)
+        context['url_home'] = reverse_lazy('bases:home')
         return context
 
 
@@ -228,7 +231,7 @@ class FormularServicioNew(CreateView):
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Formulario de atención'
-        # context['list_perfil'] = reverse_lazy('usuario:mi_perfil')
+        context['url_home'] = reverse_lazy('bases:home')
         return context
 
 

@@ -3,22 +3,17 @@
 {% block columns %}
   <tr>
     <th scope="col" >No. orden</th>
+    <th scope="col" >observacion</th>
     <th scope="col" >Tipo servicio</th>
-    <th class="all">Opciones</th>
   </tr>
 {% endblock %}
 
 {% block rows %}
 {% for m in ordengenerada_list  %}
   <tr>
+    <td>{{m.no_servicio}}</td>
     <td>{{m.nombre}}</td>
-    <td></td>
-    <td>
-      <a href="" class="btn btn-warning btn-xs btn-flat">
-        <i class="fas fa-edit"></i></a>
-      <a href="#" class="btn btn-danger btn-xs btn-flat">
-        <i class="fas fa-trash-alt"></i></a>
-    </td>
+    <td>{{m.no_servicio.tipo_servicio.name}}</td>
   </tr>
 {% endfor %}
 {% endblock %}
