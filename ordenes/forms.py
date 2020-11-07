@@ -62,7 +62,7 @@ class OrdenGeneradaForm(ModelForm):
         exclude = ['username', 'estado']
         labels = {
             # 'no_servicio': 'No. Servicio',
-            'nombre':'No. Ventanilla'
+            'nombre':'Observacion'
 
         }
         widgets = {
