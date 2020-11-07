@@ -118,6 +118,7 @@ class GenerarServicio(ListView):
         context ['title'] = 'Generar Orden de Servicio'
         context['list_url'] = reverse_lazy('ordenes:lista_generadas_servicios')
         context['new_url'] = reverse_lazy('ordenes:new_generadas_servicios')
+        print(context)
         return context
 
 class GenerarServicioNew(CreateView):
