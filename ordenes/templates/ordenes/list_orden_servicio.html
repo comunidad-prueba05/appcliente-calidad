@@ -9,16 +9,14 @@
 {% endblock %}
 
 {% block rows %}
-{% for m in servicio_list  %}
+
   <tr>
-    <td>{{m.no_servicio}}</td>
-    <td>{{m.tipo_servicio}}</td>
+    <td>{{object_list.no_servicio}}</td>
+    <td>{{object_list.tipo_servicio}}</td>
     <td>
       <a href="#" class="btn btn-warning btn-xs btn-flat">
         <i class="fas fa-edit"></i></a>
-      <a href="#" class="btn btn-danger btn-xs btn-flat">
-        <i class="fas fa-trash-alt"></i></a>
     </td>
   </tr>
-{% endfor %}
+
 {% endblock %}
