@@ -2,8 +2,8 @@ from django.shortcuts import render
 from django.views.generic import CreateView, ListView, UpdateView, DeleteView,TemplateView ,DetailView
 from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 
-from ordenes.models import TiposServicio, Servicio, OrdenGenerada
-from ordenes.forms import TipoServicioForm, OrdenServicioForm, OrdenGeneradaForm
+from ordenes.models import TiposServicio, Servicio, OrdenGenerada, Cliente, FormularServicio
+from ordenes.forms import TipoServicioForm, OrdenServicioForm, OrdenGeneradaForm, ClienteForm, FormularServicioForm
 from django.urls import reverse_lazy
 
 
@@ -148,29 +148,97 @@ class GenerarServicioNew(CreateView):
 
 
 
-# class DatosServicioNew(CreateView):
-#     model = OrdenGenerada
-#     template_name = 'ordenes/create_orden_generada_servicio.html'
-#     form_class = OrdenGeneradaForm
-#     success_url = reverse_lazy('ordenes:lista_generadas_servicios')
-#
-#     def get_context_data(self, *args, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context['title'] = 'Formulario de atención'
-#         # context['list_perfil'] = reverse_lazy('usuario:mi_perfil')
-#         return context
-#
-#
-#     def post(self, request, *args, **kwargs):
-#         form = OrdenGeneradaForm(request.POST)
-#         if form.is_valid():
-#             self.object = form.save(commit=False)
-#             self.object.username = self.request.user
-#             id_servicio = self.object.no_servicio.pk
-#             servicio_update = Servicio.objects.get(pk=id_servicio)
-#             servicio_update.orden_transito = False
-#             servicio_update.orden_transito = False
-#             form.save()
-#             servicio_update.save()
-#             return HttpResponseRedirect(self.success_url)
-#         return render(request, self.template_name, {'form': form})
+
+class ClienteList(ListView):
+    model =  Cliente
+    template_name = 'ordenes/list_cliente.html'
+
+
+    def get_queryset(self):
+        return self.model.objects.all()
+
+    def get_context_data(self , *args , **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context ['title'] = 'Listado de Clientes'
+        context['list_url'] = reverse_lazy('ordenes:lista_cliente')
+        context['new_url'] = reverse_lazy('ordenes:new_cliente')
+        return context
+
+
+class ClienteNew(CreateView):
+    model = Cliente
+    template_name = 'ordenes/create_cliente.html'
+    form_class = ClienteForm
+    success_url = reverse_lazy('ordenes:lista_cliente')
+
+    def post(self, request, *args, **kwargs):
+        form = ClienteForm(request.POST)
+        if form.is_valid():
+            self.object = form.save(commit=False)
+            self.object.username = self.request.user
+            form.save()
+            return HttpResponseRedirect(self.success_url)
+        return render(request, self.template_name, {'form': form})
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Registrar Cliente'
+        # context['list_perfil'] = reverse_lazy('usuario:mi_perfil')
+        return context
+
+class ClienteUpdate(UpdateView):
+    model = Cliente
+    template_name = 'ordenes/create_cliente.html'
+    form_class = ClienteForm
+    success_url = reverse_lazy('ordenes:lista_cliente')
+
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Editar cliente'
+        # context['list_perfil'] = reverse_lazy('usuario:mi_perfil')
+        return context
+
+class FormularServicioList(ListView):
+    model =  FormularServicio
+    template_name = 'ordenes/list_form_servicio.html'
+
+
+    def get_queryset(self):
+        return self.model.objects.all()
+
+    def get_context_data(self , *args , **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context ['title'] = 'Listado de Servicios'
+        context['list_url'] = reverse_lazy('ordenes:lista_form_servicio')
+        context['new_url'] = reverse_lazy('ordenes:new_form_servicio')
+        print(context)
+        return context
+
+
+class FormularServicioNew(CreateView):
+    model = FormularServicio
+    template_name = 'ordenes/create_form_servicio.html'
+    form_class = FormularServicioForm
+    success_url = reverse_lazy('ordenes:lista_generadas_servicios')
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Formulario de atención'
+        # context['list_perfil'] = reverse_lazy('usuario:mi_perfil')
+        return context
+
+
+    def post(self, request, *args, **kwargs):
+        form = FormularServicioForm(request.POST)
+        if form.is_valid():
+            self.object = form.save(commit=False)
+            self.object.username = self.request.user
+            id_servicio = self.object.no_servicio.pk
+            servicio_update = Servicio.objects.get(pk=id_servicio)
+            servicio_update.orden_transito = False
+            servicio_update.orden_generada = False
+            form.save()
+            servicio_update.save()
+            return HttpResponseRedirect(self.success_url)
+        return render(request, self.template_name, {'form': form})

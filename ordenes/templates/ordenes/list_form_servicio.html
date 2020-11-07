@@ -1,0 +1,24 @@
+{% extends 'base/list.html' %}
+
+{% block columns %}
+  <tr>
+    <th scope="col" >No. Servicio</th>
+    <th scope="col" >Atendido por</th>
+    <th scope="col" >Observacion</th>
+    <th class="all">Opciones</th>
+  </tr>
+{% endblock %}
+
+{% block rows %}
+{% for m in formularservicio_list %}
+  <tr>
+    <td>{{m.no_servicio}}</td>
+    <td>{{m.username.first_name}}</td>
+    <td>{{m.observacion}}</td>
+    <td>
+      <a href="#" class="btn btn-warning btn-xs btn-flat">
+        <i class="fas fa-edit"></i></a>
+    </td>
+  </tr>
+{% endfor %}
+{% endblock %}

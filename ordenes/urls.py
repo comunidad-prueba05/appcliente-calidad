@@ -1,6 +1,7 @@
 from django.urls import path
 from ordenes.views import (TipoServicio, TipoServicioNew, TipoServicioUpdate, OrdenServicio, ServicioNew,
-PantallList, GenerarServicio, GenerarServicioNew)
+PantallList, GenerarServicio, GenerarServicioNew, ClienteList, ClienteNew, ClienteUpdate, FormularServicioList,
+FormularServicioNew)
 
 urlpatterns = [
     path('lista-servicios/', TipoServicio.as_view(), name='lista_servicios'),
@@ -13,5 +14,12 @@ urlpatterns = [
 
     path('lista-generadas-servicios/', GenerarServicio.as_view(), name='lista_generadas_servicios'),
     path('new-generadas-servicios/', GenerarServicioNew.as_view(), name='new_generadas_servicios'),
+
+    path('lista-cliente/', ClienteList.as_view(), name='lista_cliente'),
+    path('new-cliente/', ClienteNew.as_view(), name='new_cliente'),
+    path('update-cliente/<int:pk>/', ClienteUpdate.as_view(), name='update_cliente'),
+
+    path('lista-form-servicio/', FormularServicioList.as_view(), name='lista_form_servicio'),
+    path('new-form-servicio/', FormularServicioNew.as_view(), name='new_form_servicio'),
 
 ]

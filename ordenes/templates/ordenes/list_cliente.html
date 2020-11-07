@@ -1,0 +1,26 @@
+{% extends 'base/list.html' %}
+
+{% block columns %}
+  <tr>
+    <th scope="col" >Nombre Completo</th>
+    <th scope="col" >NIT</th>
+    <th scope="col" >Telefono</th>
+    <th scope="col" >Dirección</th>
+    <th class="all">Opciones</th>
+  </tr>
+{% endblock %}
+
+{% block rows %}
+{% for m in cliente_list  %}
+  <tr>
+    <td>{{m.nombres}} {{m.apellidos}}</td>
+    <td>{{m.nit}}</td>
+    <td>{{m.tel}}</td>
+    <td>{{m.direccion}}</td>
+    <td>
+      <a href="{% url 'ordenes:update_cliente' m.pk %}" class="btn btn-warning btn-xs btn-flat">
+        <i class="fas fa-edit"></i></a>
+    </td>
+  </tr>
+{% endfor %}
+{% endblock %}

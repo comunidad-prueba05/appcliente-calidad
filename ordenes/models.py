@@ -99,6 +99,7 @@ class Cliente(BaseModel):
     apellidos = models.CharField('Apellidos cliente', max_length=200)
     nit = models.CharField('NIT', max_length=20)
     tel = models.CharField('telefono', max_length=10)
+    direccion = models.CharField('Dirección', max_length=250)
 
     def __str__(self):
         return self.nombres
@@ -116,6 +117,30 @@ class Cliente(BaseModel):
         verbose_name = 'Cliente'
         verbose_name_plural = 'Clientes'
         db_table = 'cliente'
+
+
+class FormularServicio(BaseModel):
+    username = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
+    cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
+    no_servicio = models.ForeignKey(Servicio, on_delete=models.CASCADE)
+    observacion = models.TextField('Descripcion del servicio')
+
+    def __str__(self):
+        return '{}'.format(self.username.first_name)
+
+    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+        user = get_current_user()
+        if user is not None:
+            if not self.pk:
+                self.user_creation = user
+            else:
+                self.user_updated = user
+        super(FormularServicio, self).save()
+
+    class Meta:
+        verbose_name = 'Formulario de Servicio'
+        verbose_name_plural = 'Formulario de Servicios'
+        db_table = 'formulario_servicio'
 
 
 
