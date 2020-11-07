@@ -63,7 +63,6 @@ class OrdenServicio(ListView):
 
     def get_queryset(self):
         tiket = self.model.objects.latest('date_creation')
-        # print(tiket)
         return  tiket
 
 
@@ -72,7 +71,6 @@ class OrdenServicio(ListView):
         context ['title'] = 'Atencion al Cliente'
         context['list_url'] = reverse_lazy('ordenes:lista_ordenes_servicios')
         context['new_url'] = reverse_lazy('ordenes:new_ordenes_servicios')
-        print(context)
         return context
 
 class ServicioNew(CreateView):

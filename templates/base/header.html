@@ -15,7 +15,7 @@
         <div class="collapse navbar-collapse order-3" id="navbarCollapse">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a href="#" class="nav-link"><i class="fas fa-home"></i> Home</a>
+                    <a href="{% url 'bases:home' %}" class="nav-link"><i class="fas fa-home"></i>Inicio</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
@@ -33,6 +33,8 @@
                             Formulario del servicio</a></li>
                         <li><a href="{% url 'ordenes:lista_cliente' %}" class="dropdown-item"><i
                                 class="fas fa-user-friends"></i> Listado de Clientes</a></li>
+                        <li><a href="{% url 'usuario:list_usuario' %}" class="dropdown-item"><i
+                                class="fas fa-user-friends"></i> Listado de Usuario</a></li>
                     </ul>
                 </li>
             </ul>
@@ -47,13 +49,13 @@
                         Sú último acceso fue {{ request.user.last_login }}
                     </span>
                     <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item">
+                    <a href="{% url 'usuario:update_usuario' user.pk %}" class="dropdown-item">
                         <i class="fas fa-edit mr-2"></i> Editar perfil
                         <span class="float-right text-muted text-sm">3 mins</span>
                     </a>
                     <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item">
-                        <i class="fas fa-lock mr-2"></i> Editar password
+                    <a href="{% url 'usuario:new_usuario' %}" class="dropdown-item">
+                        <i class="fas fa-lock mr-2"></i> Crear Usuario
                         <span class="float-right text-muted text-sm">12 hours</span>
                     </a>
                     <div class="dropdown-divider"></div>

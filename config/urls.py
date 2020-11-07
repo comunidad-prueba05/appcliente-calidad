@@ -23,6 +23,7 @@ urlpatterns = [
     path('',include(('homepage.urls', 'homepage'), namespace='homepage') ),
     path('bases/',include(('bases.urls', 'bases'), namespace='bases') ),
     path('ordenes/',include(('ordenes.urls', 'ordenes'), namespace='ordenes') ),
+    path('usuario/',include(('usuario.urls', 'usuario'), namespace='usuario') ),
     path('admin/', admin.site.urls),
 
 ]
